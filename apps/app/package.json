@@ -1,0 +1,41 @@
+{
+  "name": "@databuilder/app",
+  "description": "The databuilder family app",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Vlandor LTD",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "next -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "tsc": "tsc",
+    "lint": "eslint . --ext .tsx,.ts,.js"
+  },
+  "dependencies": {
+    "@databuilder/api": "^0.0.0",
+    "@databuilder/dom-generic": "^0.0.0",
+    "@databuilder/types": "^0.0.0",
+    "@iconscout/unicons": "^3.0.6",
+    "classnames": "^2.2.6",
+    "next": "^10.0.5",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^4.1.0",
+    "react": "^17.0.1",
+    "react-datepicker": "^3.6.0",
+    "react-dom": "^17.0.1",
+    "react-intl-universal": "^2.4.3"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^10.0.5",
+    "@types/classnames": "latest",
+    "@types/node": "^14.14.21",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "next-plugin-svgr": "^1.0.0",
+    "serverless": "^2.19.0"
+  },
+  "installConfig": {
+    "hoistingLimits": "dependencies"
+  }
+}

@@ -1,0 +1,18 @@
+aws_account_id: ${env.AWS_ACCOUNT_ID}
+
+app:
+  component: "@sls-next/serverless-component@1.19.0-alpha.30"
+  inputs:
+    name:
+      defaultLambda: client-app
+      imageLambda: client-image
+    roleArn: 'arn:aws:iam::${aws_account_id}:role/tf-client-nextjs'
+    bucketName: "${env.APP_BUCKET}"
+    domain: ["app", "${env.DOMAIN}"]
+    cloudfront:
+      distributionId: ${env.APP_CLOUDFRONT_ID}
+      priceClass: "PriceClass_100"
+      defaults:
+        forward:
+          headers: [Accept]
+  

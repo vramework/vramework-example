@@ -1,0 +1,33 @@
+.header {
+  box-shadow: var(--layout-box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-bg);
+  display: flex;
+  padding: 0 1rem;
+}
+
+.content {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.menu_button {
+  margin-left: auto;
+}
+
+@media (min-width: 500px) {
+  .content {
+    margin: 0 2rem;
+  }
+}
+
+@media (min-width: 700px) {
+  .menu_button {
+    display: none;
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@databuilder/api",
+  "version": "0.0.0",
+  "description": "The databuilder restful API",
+  "repository": "git@github.com:databuilder/mono.git",
+  "author": "databuilder",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "peerDependencies": {
+    "next": "^10.0.5",
+    "react": "^17.0.0",
+    "react-intl-universal": "^2.4.3"
+  },
+  "dependencies": {
+    "@databuilder/api": "^0.0.0",
+    "@databuilder/types": "^0.0.0",
+    "ably": "^1.2.5",
+    "eventemitter3": "^4.0.7",
+    "fast-deep-equal": "^3.1.3",
+    "use-async-effect": "^2.2.2"
+  }
+}

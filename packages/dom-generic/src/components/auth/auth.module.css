@@ -1,0 +1,135 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background-color: var(--color-bg);
+  background-image: url(/image/hero.jpg);
+  background-repeat: no-repeat;
+  background-size: 350rem;
+  background-position: right;
+}
+
+.error {
+  min-height: 1.3rem;
+  color: var(--color-error);
+}
+
+.auth_header {
+  display: flex;
+  position: absolute;
+  top: 3rem;
+  right: 4rem;
+  transform: scale(1.2);
+}
+
+.card {
+  width: 375px;
+  margin: auto;
+  padding: 1rem 2rem;
+  background-color: var(--color-bg);
+  border-radius: 20px;
+}
+
+.card form {
+  display: flex;
+  flex-direction: column;
+}
+
+.card form > * {
+  margin: 0.8rem 0;
+  font-size: 1.2rem;
+}
+
+.card input[type='email'],
+.card input[type='password'],
+.card input[type='text'] {
+  width: 100%;
+  height: 3.5rem;
+  margin: 0.5rem 0;
+  padding: 0 1.2rem;
+  font-size: 1.2rem;
+}
+
+.action {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  composes: primarybutton from '~webapp/button.module.css';
+  width: 100%;
+  height: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.links > a,
+.links > span {
+  font-weight: 400;
+}
+
+.links > span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login > a {
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: 400;
+}
+
+.heading {
+  font-size: 2.7rem;
+  font-weight: 600;
+  margin: .6rem 0 2rem 0;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.checkbox > span {
+  color: var(--color-tertiary);
+  font-weight: 400;
+}
+
+.checkbox input[type='checkbox'] {
+  min-height: 20px;
+  min-width: 20px;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+@media (min-width: 1000px) {
+  .wrapper {
+    background-color: var(--color-bg);
+    background-image: url(/image/hero.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right;
+  }
+
+  .container::before {
+    content: ' ';
+    display: inline-block;
+    width: 50%;
+  }
+
+  .card {
+    max-width: 30rem;
+    min-width: 15rem;
+    border-radius: 20px;
+  }
+}

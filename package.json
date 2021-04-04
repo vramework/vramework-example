@@ -1,0 +1,71 @@
+{
+  "name": "databuilder",
+  "version": "0.0.0",
+  "description": "The databuilder monorepo",
+  "repository": "git@github.com:vlandor/databuilder.git",
+  "author": "databuilder",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/**",
+      "backends/**",
+      "apps/**"
+    ],
+    "nohoist": [
+      "**/serverless",
+      "**/serverless/**",
+      "**/@sls-next/**"
+    ]
+  },
+  "scripts": {
+    "dev:app": "cd apps/app && yarn run dev",
+    "dev:server": "cd backends/express && yarn run start:dev",
+    "db:drop": "dropdb databuilder --host=localhost",
+    "db:migrate": "ts-node scripts/db-migrate.ts",
+    "db:create": "yarn run db:migrate && yarn run schema:db && yarn run schema:tsc",
+    "db:recreate": "yarn run db:drop && yarn run db:create",
+    "schema:db": "schemats generate -c postgres://postgres:password@localhost/databuilder -s app -o packages/types/generated/db-types.ts -C",
+    "schema:tsc": "ts-node scripts/generate-json-schema.ts",
+    "i18n:generate": "ts-node scripts/generate-i18n.ts && ts-node scripts/generate-i18n-fields.ts",
+    "lint": "eslint . --ext .ts,.tsx",
+    "tsc": "yarn workspaces run tsc",
+    "verify": "yarn run tsc && yarn run lint",
+    "postinstall": "node ./node_modules/patch-package/index.js"
+  },
+  "devDependencies": {
+    "@databuilder/functions": "^0.0.0",
+    "@types/node": "^14.14.21",
+    "@typescript-eslint/eslint-plugin": "4.14.0",
+    "@typescript-eslint/parser": "4.14.0",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "husky": "^4.3.8",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
+    "prettier": "^2.2.1",
+    "schemats": "^3.0.3",
+    "stylelint": "^13.11.0",
+    "stylelint-config-css-modules": "^2.2.0",
+    "stylelint-config-standard": "^20.0.0",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.1.3",
+    "typescript-json-schema": "^0.47.0",
+    "node-fetch": "^2.6.1",
+    "dotenv": "^8.2.0",
+    "js-yaml": "^4.0.0",
+    "postgres-migrations": "^5.1.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn run tsc"
+    }
+  },
+  "resolutions": {
+    "schemats/pg-promise": "10.5.2",
+    "pg-promise/pg": "8.5.1"
+  }
+}
