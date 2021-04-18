@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mkdir -p packages/functions/generated/schemas
-mkdir -p packages/types/generated/
+mkdir -p packages/example/functions/generated/schemas
+mkdir -p packages/example/types/generated/
 mkdir -p apps/app/public/i18n/

@@ -1,26 +1,7 @@
---- JWT ---
-CREATE SEQUENCE "app".jwt_secret_seq START 1 INCREMENT 1;
-CREATE TABLE "app"."jwt_secret" ( 
-  "keyid" text PRIMARY KEY NOT NULL DEFAULT nextval('"app".jwt_secret_seq'::text), 
-  "secret" text NOT NULL
-);
-INSERT INTO "app".jwt_secret ("secret") VALUES ('the-secrets-of-secrets');
-
 --- Enums
 CREATE TYPE "app"."role" AS enum (
-  'employee',
-  'client',
-  'caregiver',
-  'admin'
 );
 
-CREATE TYPE "app"."app_locale" AS enum (
-  'en',
-  'de',
-  'ro'
-);
-
--- Tables
 CREATE TABLE "app"."user_auth" ( 
   "id" uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
   "role" app.role NOT NULL,

@@ -10,26 +10,10 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
---- Inquiry Table ---
-
-CREATE TABLE "app"."inquiry" (
-    "id" text PRIMARY KEY,
-    "last_updated_at" timestamp DEFAULT now() NOT NULL,
-    "postcode" int,
-    "startdate" text,
-    "whom" text,
-    "household" text,
-    "carelevel" text,
-    "mobility" text,
-    "nightcare" text,
-    "dementia" text,
-    "accomodation" text,
-    "contract" text,
-    "email" text,
-    "firstname" text,
-    "lastname" text,
-    "telephone" text,
-    "desired_contact_window" text
+--- JWT ---
+CREATE SEQUENCE "app".jwt_secret_seq START 1 INCREMENT 1;
+CREATE TABLE "app"."jwt_secret" ( 
+  "keyid" text PRIMARY KEY NOT NULL DEFAULT nextval('"app".jwt_secret_seq'::text), 
+  "secret" text NOT NULL
 );
-CREATE TRIGGER update_inquiry_last_update_timestamp BEFORE UPDATE ON "app"."inquiry" FOR EACH ROW EXECUTE PROCEDURE update_change_timestamp();
-
+INSERT INTO "app".jwt_secret ("secret") VALUES ('the-ultimate-secret');

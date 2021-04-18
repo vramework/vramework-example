@@ -1,6 +1,6 @@
 import { promises } from 'fs'
 import * as TJS from 'typescript-json-schema'
-import { getRoutes } from '@databuilder/functions/src/api'
+import { getRoutes } from '@vramework/functions/src/routes'
 
 async function program() {
   const routes = getRoutes()
@@ -14,7 +14,7 @@ async function program() {
     noExtraProps: true,
   }
 
-  const program = TJS.programFromConfig('backends/serverless/tsconfig.json')
+  const program = TJS.programFromConfig('backends/cloud/tsconfig.json')
   const generator = TJS.buildGenerator(program, settings)
 
   if (generator === null) {
@@ -25,7 +25,7 @@ async function program() {
     schemas.map(
       async (schema) =>
         await promises.writeFile(
-          `${__dirname}/../packages/functions/generated/schemas/${schema}.json`,
+          `${__dirname}/../packages/example/functions/generated/schemas/${schema}.json`,
           JSON.stringify(generator.getSchemaForSymbol(schema)),
           'utf-8',
         ),
@@ -33,8 +33,8 @@ async function program() {
   )
 
   await promises.writeFile(
-    `${__dirname}/../packages/functions/generated/schemas.ts`,
-    'import { addSchema } from \'../src/schema\'\n' +
+    `${__dirname}/../packages/example/functions/generated/schemas.ts`,
+    'import { addSchema } from \'@vramework/backend-common/src/schema\'\n' +
       schemas
         .map(
           (schema) => `
@@ -45,4 +45,5 @@ addSchema('${schema}', ${schema})`,
     'utf8',
   )
 }
+
 program()

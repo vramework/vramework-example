@@ -1,6 +1,6 @@
 {
-  "name": "@databuilder/app",
-  "description": "The databuilder family app",
+  "name": "@vramework/app",
+  "description": "The vramework app",
   "version": "0.0.0",
   "private": true,
   "author": "Vlandor LTD",
@@ -13,9 +13,9 @@
     "lint": "eslint . --ext .tsx,.ts,.js"
   },
   "dependencies": {
-    "@databuilder/api": "^0.0.0",
-    "@databuilder/dom-generic": "^0.0.0",
-    "@databuilder/types": "^0.0.0",
+    "@vramework/api": "^0.0.0",
+    "@vramework/dom-generic": "^0.0.0",
+    "@vramework/types": "^0.0.0",
     "@iconscout/unicons": "^3.0.6",
     "classnames": "^2.2.6",
     "next": "^10.0.5",

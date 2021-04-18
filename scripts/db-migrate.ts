@@ -21,7 +21,7 @@ async function dbmigrate() {
       host: PGHOST || 'localhost',
       password: PGPASSWORD || 'password',
       port: Number(PGPORT) || 5432,
-      database: PGDATABASE || 'databuilder',
+      database: 'vramework',
     }
 
     await createDb(dbConfig.database, dbConfig)
