@@ -46,5 +46,5 @@ package:
     - serverless.ts
     - tsconfig.json
     - webpack.config.js
-    - node_modules/@vramework/example-**
+    - node_modules/@vramework-example/**
     - node_modules/@types/**

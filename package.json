@@ -34,7 +34,7 @@
     "postinstall": "node ./node_modules/patch-package/index.js"
   },
   "devDependencies": {
-    "@vramework/example-functions": "^0.0.0",
+    "@vramework-example/functions": "^0.0.0",
     "@types/node": "^14.14.21",
     "@typescript-eslint/eslint-plugin": "4.14.0",
     "@typescript-eslint/parser": "4.14.0",

@@ -1,5 +1,5 @@
 {
-  "name": "@vramework/example-functions",
+  "name": "@vramework-example/functions",
   "version": "0.0.0",
   "description": "The vramework backend functions logic package",
   "repository": "git@github.com:vlandor/vramework.git",
@@ -19,7 +19,7 @@
     "@types/uuid": "^8.3.0"
   },
   "dependencies": {
-    "@vramework/example-types": "^0.0.0",
+    "@vramework-example/types": "^0.0.0",
     "@vramework/backend-common": "^0.0.0",
     "@aws-sdk/client-s3": "^3.4.1",
     "@aws-sdk/client-secrets-manager": "^3.3.0",

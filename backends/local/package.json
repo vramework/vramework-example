@@ -1,5 +1,5 @@
 {
-  "name": "@vramework/example-local",
+  "name": "@vramework-example/local",
   "version": "0.0.0",
   "description": "The vramework express server (for local development)",
   "license": "UNLICENSED",
@@ -11,8 +11,8 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@vramework/example-functions": "^0.0.0",
-    "@vramework/example-types": "^0.0.0",
+    "@vramework-example/functions": "^0.0.0",
+    "@vramework-example/types": "^0.0.0",
     "@vramework/express": "^0.0.0",
     "body-parser": "^1.19.0",
     "commander": "^6.2.1",

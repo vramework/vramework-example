@@ -1,9 +1,9 @@
 import * as commander from 'commander'
 import { ExpressServer } from '@vramework/express/express-server'
 
-import { config } from '@vramework/example-functions/src/config'
-import { setupServices } from "@vramework/example-functions/src/services"
-import { getRoutes } from "@vramework/example-functions/src/routes"
+import { config } from '@vramework-example/functions/src/config'
+import { setupServices } from "@vramework-example/functions/src/services"
+import { getRoutes } from "@vramework-example/functions/src/routes"
 
 // work-around for:
 // TS4023: Exported variable 'command' has or is using name 'local.Command'

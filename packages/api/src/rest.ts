@@ -1,6 +1,3 @@
-// import { Routes } from '@vramework/example-types/src/routes'
-// import { ImageProperties, ImageUploadResponse } from '@vramework/example-types/src/upload'
-
 let apiPrefix = ''
 let authorizationJwt: string | undefined = undefined
 
@@ -136,30 +133,3 @@ export async function del(url: string): Promise<void> {
     throw 'Didnt happen'
   }
 }
-
-// export const uploadImage = async (
-//   entityType: EntityType,
-//   familyId: string | undefined,
-//   id: string,
-//   image: ImageProperties,
-//   name: 'uuid' | string = 'uuid',
-// ): Promise<string> => {
-//   const blob = await fetch(image.src).then((r) => r.blob())
-//   const signedUrl = await post<ImageUploadResponse>(Routes.UPLOAD_SIGN_IMAGE, {
-//     entityType,
-//     familyId,
-//     id,
-//     contentType: image.contentType,
-//     size: blob.size,
-//     name,
-//   })
-//   // TODO: Cors isn't needed for S3 tho
-//   await fetch(signedUrl.uploadUrl, {
-//     method: 'PUT',
-//     body: blob,
-//     cache: 'no-cache',
-//     mode: 'cors',
-//     credentials: 'include',
-//   })
-//   return signedUrl.assetKey
-// }
