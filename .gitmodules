@@ -1,3 +1,0 @@
-[submodule "packages/core"]
-	path = packages/core
-	url = git@github.com:vlandor/vramework-core.git
