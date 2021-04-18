@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Head from 'next/head'
 import intl from 'react-intl-universal'
-import { inferAPIPrefix } from '@vramework/api/src/rest'
-import { I18nContext } from '@vramework/api/src/contexts/i18n'
+import { inferAPIPrefix } from '@vramework/example-api/src/rest'
+import { I18nContext } from '@vramework/example-api/src/contexts/i18n'
 
 const MyApp: React.FunctionComponent<{ Component: React.FunctionComponent; pageProps: any }> = ({
   Component,

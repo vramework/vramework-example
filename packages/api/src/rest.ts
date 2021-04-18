@@ -1,5 +1,5 @@
-// import { Routes } from '@vramework/types/src/routes'
-// import { ImageProperties, ImageUploadResponse } from '@vramework/types/src/upload'
+// import { Routes } from '@vramework/example-types/src/routes'
+// import { ImageProperties, ImageUploadResponse } from '@vramework/example-types/src/upload'
 
 let apiPrefix = ''
 let authorizationJwt: string | undefined = undefined

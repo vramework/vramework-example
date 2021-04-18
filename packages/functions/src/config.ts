@@ -2,10 +2,6 @@ import { Config } from './api'
 
 export const config: Config = {
   domain: process.env.DOMAIN || 'vramework.app',
-  authFlag: {
-    required: true,
-    value: 'secrets',
-  },
   postgres: {
     user: 'postgres',
     host: 'localhost',

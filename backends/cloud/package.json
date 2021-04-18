@@ -1,5 +1,5 @@
 {
-  "name": "@vramework/cloud",
+  "name": "@vramework/example-cloud",
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
@@ -8,8 +8,8 @@
     "serverless": "yarn run webpack && serverless deploy --stage prod"
   },
   "dependencies": {
-    "@vramework/functions": "^0.0.0",
-    "@vramework/types": "^0.0.0",
+    "@vramework/example-functions": "^0.0.0",
+    "@vramework/example-types": "^0.0.0",
     "@vramework/lambda": "^0.0.0"
   },
   "devDependencies": {

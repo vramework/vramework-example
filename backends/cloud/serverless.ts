@@ -2,9 +2,9 @@ import { APIGatewayProxyEvent } from "aws-lambda"
 
 import { processCors, processCorsless } from "@vramework/lambda/lambda"
 
-import { config } from '@vramework/functions/src/config'
-import { setupServices } from "@vramework/functions/src/services"
-import { getRoutes } from "@vramework/functions/src/routes"
+import { config } from '@vramework/example-functions/src/config'
+import { setupServices } from "@vramework/example-functions/src/services"
+import { getRoutes } from "@vramework/example-functions/src/routes"
 
 const services = setupServices(config)
 const routes = getRoutes()

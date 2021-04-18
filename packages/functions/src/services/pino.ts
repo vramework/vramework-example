@@ -2,7 +2,7 @@ import pino from 'pino'
 import { Logger } from 'pino'
 import { Slack } from './slack'
 
-export class PinoLogger {
+export class PinoLogger  {
   private logger: Logger
 
   constructor(private slack: Slack) {
@@ -21,8 +21,8 @@ export class PinoLogger {
     this.logger.warn(message, ...args)
   }
 
-  public error(message: string, error?: Error) {
+  public error(message: string, ...args: any[]) {
     this.slack.notify(message)
-    this.logger.error(message, error)
+    this.logger.error(message, args[0])
   }
 }

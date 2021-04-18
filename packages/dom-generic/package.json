@@ -1,8 +1,8 @@
 {
-  "name": "@vramework/dom-generic",
+  "name": "@vramework/example-dom-generic",
   "version": "0.0.0",
   "description": "The vramework react generic components that aren't tied into application logic",
-  "repository": "git@github.com:vramework/mono.git",
+  "repository": "git@github.com:vramework/example-mono.git",
   "author": "Valndor LTD",
   "license": "UNLICENSED",
   "private": true,
@@ -13,8 +13,8 @@
     "next": "^10.0.5"
   },
   "peerDependencies": {
-    "@vramework/api": "^0.0.0",
-    "@vramework/types": "^0.0.0",
+    "@vramework/example-api": "^0.0.0",
+    "@vramework/example-types": "^0.0.0",
     "classnames": "^2.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"

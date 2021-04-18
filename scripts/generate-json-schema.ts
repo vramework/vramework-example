@@ -1,6 +1,6 @@
 import { promises } from 'fs'
 import * as TJS from 'typescript-json-schema'
-import { getRoutes } from '@vramework/functions/src/routes'
+import { getRoutes } from '@vramework/example-functions/src/routes'
 
 async function program() {
   const routes = getRoutes()

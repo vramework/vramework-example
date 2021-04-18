@@ -2,7 +2,7 @@
 const path = require('path')
 const withSvgr = require('next-plugin-svgr')
 const withPlugins = require('next-compose-plugins')
-const withTM = require('next-transpile-modules')([ '@vramework/*', 'react-select-search'])
+const withTM = require('next-transpile-modules')([ '@vramework/example-*', 'react-select-search'])
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })

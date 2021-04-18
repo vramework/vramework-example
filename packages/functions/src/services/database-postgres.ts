@@ -5,7 +5,7 @@ import { snakeCase } from 'snake-case'
 
 // @ts-ignore
 import * as pgCamelCase from 'pg-camelcase'
-import { Config } from '@vramework/functions/src/api'
+import { Config } from '@vramework/example-functions/src/api'
 import { Logger } from '@vramework/backend-common/src/services'
 pgCamelCase.inject(pg)
 

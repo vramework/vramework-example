@@ -11,7 +11,7 @@ import { Email } from "./services/email"
 export const setupServices = async (config: Config): Promise<Services> => {
     console.time('Setup Services')
     const slack = new Slack(config)
-    const logger = new PinoLogger(slack)
+    const logger = new PinoLogger(slack) as any
 
     const promises: Array<Promise<void>> = []
 
