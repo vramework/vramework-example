@@ -10,7 +10,10 @@ module.exports = {
   })],
   devtool: 'source-map',
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js'],
+    alias: {
+      'pg-native': path.join(__dirname, 'aliases/pg-native.js')
+    }
   },
   output: {
     libraryTarget: 'commonjs',
