@@ -4,7 +4,7 @@
   "description": "The vramework react generic components that aren't tied into application logic",
   "repository": "git@github.com:vramework/example-mono.git",
   "author": "Valndor LTD",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "tsc": "tsc"

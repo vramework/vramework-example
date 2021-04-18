@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "author": "Vlandor LTD",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "dev": "next -p 3001",
     "build": "next build",

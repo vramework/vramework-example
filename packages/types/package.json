@@ -4,7 +4,7 @@
     "description": "The vramework typescript types",
     "repository": "git@github.com:vlandor/vramework.git",
     "author": "Vlandor LTD",
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "scripts": {
         "tsc": "tsc"

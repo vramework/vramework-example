@@ -1,7 +1,7 @@
 {
   "name": "@vramework-example/cloud",
   "version": "1.0.0",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "webpack": "webpack --config webpack.config.js",
     "deploy:domain": "sls create_domain --stage prod",
