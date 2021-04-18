@@ -25,7 +25,7 @@ async function program() {
     schemas.map(
       async (schema) =>
         await promises.writeFile(
-          `${__dirname}/../packages/example/functions/generated/schemas/${schema}.json`,
+          `${__dirname}/../packages/functions/generated/schemas/${schema}.json`,
           JSON.stringify(generator.getSchemaForSymbol(schema)),
           'utf-8',
         ),
@@ -33,8 +33,8 @@ async function program() {
   )
 
   await promises.writeFile(
-    `${__dirname}/../packages/example/functions/generated/schemas.ts`,
-    'import { addSchema } from \'@vramework/backend-common/src/schema\'\n' +
+    `${__dirname}/../packages/functions/generated/schemas.ts`,
+    schemas.length > 0 ? 'import { addSchema } from \'@vramework/backend-common/src/schema\'\n' : 'export const empty = true;' +
       schemas
         .map(
           (schema) => `

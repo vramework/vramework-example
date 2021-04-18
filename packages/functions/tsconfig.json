@@ -2,10 +2,9 @@
     "compilerOptions": {
       "target": "ES2018",
       "module": "commonjs",
-      "outDir": ".build",
       "declaration": false,
       "sourceMap": true,
-      "noEmit": false,
+      "noEmit": true,
       "noUnusedLocals": true,
       "strict": true,
       "lib": [
