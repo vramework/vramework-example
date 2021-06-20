@@ -1,37 +1,65 @@
-import { Config, Services } from "./api"
-import { PGDatabase } from "./services/database-postgres"
-import { S3File } from "./services/file-s3"
-import { PinoLogger } from "./services/pino"
-import { Slack } from "./services/slack"
-import { LocalSecretService } from "./services/secret-local"
-import { JWTManager } from "./services/jwt-manager"
-import { Permissions } from "./services/permissions"
-import { Email } from "./services/email"
+import { Config, Services, SingletonServices } from './api'
+import pino from "pino"
+import { JWTManager } from '@vramework/backend-common/src/services/jwt/jwt-manager'
+import { AWSSecrets } from '@vramework/backend-common/src/services/secrets/aws-secrets'
+import { S3Content } from '@vramework/backend-common/src/services/content/s3-content'
+import { LocalContent } from '@vramework/backend-common/src/services/content/local-content'
+import { LocalEmail } from '@vramework/backend-common/src/services/email/local-email'
+import { DatabasePostgresPool } from '@vramework/backend-common/src/services/database/database-postgres-pool'
+import { VrameworkSessionService } from '@vramework/backend-common/src/services/session/vramework-session-service'
 
-export const setupServices = async (config: Config): Promise<Services> => {
-    console.time('Setup Services')
-    const slack = new Slack(config)
-    const logger = new PinoLogger(slack) as any
+import '@enjamon/api/generated/schemas'
+import { ContentService } from '@vramework/backend-common/src/services/content/content'
+import { Session } from 'inspector'
+import { DatabasePostgresClient } from '@vramework/backend-common/src/services/database/database-postgres-client'
+import { exactlyOneResult } from '@vramework/backend-common/src/services/database/database-utils'
+import { CoreUserSession } from '../../../vramework/backend-common/src/user-session'
 
-    const promises: Array<Promise<void>> = []
-
-    const secrets = new LocalSecretService(config, logger)
-
-    const database = new PGDatabase(config, logger)
-    await database.init()
-
-    const jwt = new JWTManager(database, logger)
-    promises.push(jwt.init())
-
-    const files = new S3File(config, logger)
-    promises.push(files.init(secrets))
-
-    const permissions = new Permissions()
-    const email = new Email()
-
-    await Promise.all(promises)
-
-    console.timeEnd('Setup Services')
-    
-    return { files, logger, secrets, database, slack, jwt, permissions, email }
+export const setupServices = async (config: Config): Promise<SingletonServices> => {
+  const logger = pino()
+  if (config.logger.level) {
+    logger.level = config.logger.level
   }
+
+  const promises: Array<Promise<void>> = []
+
+  const secrets = new AWSSecrets(config, logger)
+
+  const pgConfig = await secrets.getPostgresCredentials()
+  const databasePool = new DatabasePostgresPool(pgConfig, logger)
+  await databasePool.init()
+
+  const jwt = new JWTManager<CoreUserSession>(async () => {
+    const { rows: jwtSecrets } = await databasePool.query<any>('SELECT * FROM app."jwt_secret"')
+    return jwtSecrets
+  }, logger)
+  promises.push(jwt.init())
+
+  const sessionService = new VrameworkSessionService(jwt, async (apiKey: string) => {
+    const result = await databasePool.query<CoreUserSession>('SELECT user_id, org_id FROM app."user_auth" WHERE api_key = $1', [apiKey])
+    return exactlyOneResult(result.rows, new Error())
+  })
+
+  let content: ContentService
+  if (process.env.NODE_ENV === 'production' || process.env.PRODUCTION_SERVICES) {
+    content = new S3Content(config, logger)
+    await content.init(secrets)
+  } else {
+    content = new LocalContent(config, logger)
+  }
+
+  const email = new LocalEmail(logger)
+
+  await Promise.all(promises)
+  
+  const singletonServices = { config, content, logger, secrets, databasePool, sessionService, jwt, email }
+
+  const createSessionServices = (singletonServices: SingletonServices, session: Session): Services => {
+    return {
+      ...singletonServices,
+      database: new DatabasePostgresClient(singletonServices.databasePool, logger)
+    } as never as Services
+  }
+
+  return { ...singletonServices, createSessionServices } as never as SingletonServices
+}

@@ -1,8 +1,8 @@
 {
-  "name": "vramework",
+  "name": "@vramework/example",
   "version": "0.0.0",
-  "description": "The vramework monorepo",
-  "repository": "git@github.com:vlandor/vramework.git",
+  "description": "The vramework example repo",
+  "repository": "git@github.com:vramework/vramework-example.git",
   "author": "Vlandor LTD",
   "license": "MIT",
   "private": true,
@@ -26,7 +26,7 @@
     "db:migrate": "ts-node --transpile-only scripts/db-migrate.ts",
     "db:create": "yarn run db:migrate && yarn run schema:db && yarn run schema:tsc",
     "db:recreate": "yarn run db:drop && yarn run db:create",
-    "schema:db": "schemats generate -c postgres://postgres:password@localhost/vramework -s app -o packages/types/generated/db-types.ts -C",
+    "schema:db": "schemats postgres postgres://postgres:password@localhost/vramework -s app -o packages/types/generated/db-types.ts -C",
     "schema:tsc": "ts-node --transpile-only scripts/generate-json-schema.ts",
     "lint": "eslint . --ext .ts,.tsx",
     "tsc": "yarn workspaces run tsc",
@@ -46,26 +46,18 @@
     "patch-package": "^6.2.2",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.2.1",
-    "schemats": "^3.0.3",
+    "@vramework/schemats": "^0.0.0",
     "stylelint": "^13.11.0",
     "stylelint-config-css-modules": "^2.2.0",
     "stylelint-config-standard": "^20.0.0",
     "ts-node": "^9.0.0",
     "ts-node-dev": "^1.0.0",
     "typescript": "^4.1.3",
-    "typescript-json-schema": "^0.47.0",
-    "node-fetch": "^2.6.1",
-    "dotenv": "^8.2.0",
-    "js-yaml": "^4.0.0",
     "postgres-migrations": "^5.1.1"
   },
   "husky": {
     "hooks": {
       "pre-commit": "yarn run tsc"
     }
-  },
-  "resolutions": {
-    "schemats/pg-promise": "10.5.2",
-    "pg-promise/pg": "8.5.1"
   }
 }
