@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "@vramework-example/functions": "^0.0.0",
-    "@vramework-example/types": "^0.0.0",
-    "@vramework/lambda": "^0.0.0"
+    "@vramework/deploy-lambda": "^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

@@ -1,35 +1,44 @@
-import { CoreConfig } from '@vramework/backend-common/src/config'
-import { CoreSingletonServices } from '@vramework/backend-common/src/services'
-import { CoreAPIPermission } from '@vramework/backend-common/src/routes'
-import { ContentService } from '@vramework/backend-common/src/services/content/content'
-import { DatabasePostgresClient } from '@vramework/backend-common/src/services/database/database-postgres-client'
-import { DatabasePostgresPool } from '@vramework/backend-common/src/services/database/database-postgres-pool'
-import { EmailService } from '@vramework/backend-common/src/services/email/email'
-import { JWTManager } from '@vramework/backend-common/src/services/jwt/jwt-manager'
-import { SecretService } from '@vramework/backend-common/src/services/secrets/secrets'
 import { Logger } from 'pino'
-import { CoreUserSession } from '../../../vramework/backend-common/src/user-session'
+
+import { CoreConfig } from '@vramework/core/dist/config'
+import { CoreSingletonServices } from '@vramework/core/dist/services'
+import { DatabasePostgresClient } from '@vramework/postgres/dist/database-postgres-client'
+import { DatabasePostgresPool } from '@vramework/postgres/dist/database-postgres-pool'
+import { JWTService } from '@vramework/core/dist/services/jwt-service'
+import { CoreUserSession } from '@vramework/core/dist/user-session'
+import { ContentService } from '@vramework/core/dist/services'
+import { LocalSecretService } from '@vramework/core/dist/services/local-secrets'
 
 export type Config = CoreConfig & {
   awsRegion: string
 }
 
+export type UserSession = CoreUserSession & {
+  isPaidMember: boolean
+}
+
 export type SingletonServices = CoreSingletonServices & {
-  secrets: SecretService
-  email: EmailService
+  secrets: LocalSecretService
   content: ContentService
   databasePool: DatabasePostgresPool
   logger: Logger
-  jwt: JWTManager<CoreUserSession>
+  jwt: JWTService<UserSession>
   config: Config
 }
 
+export interface Email {
+    sendEmail: (args: { template: string, from: string, to: string, body: string }) => Promise<boolean>
+}
+
 export type Services = SingletonServices & {
+  email: Email
   database: DatabasePostgresClient<string>
 }
 
-export type APIFunction<In, Out> = (services: Services, data: In, session: CoreUserSession) => Promise<Out>
-export type APIFunctionSessionless<In, Out> = (services: Services, data: In, session: Partial<CoreUserSession> & { orgId: string }) => Promise<Out>
+export type APIFunction<In, Out> = (services: Services, data: In, session: UserSession) => Promise<Out>
+export type APIFunctionSessionless<In, Out> = (services: Services, data: In, session: Partial<UserSession>) => Promise<Out>
+
+export type APIPermission<Data> = (services: Services, data: Data, session: UserSession) => Promise<boolean>
 
 export type APIRoute<In, Out> = {
   type: 'post' | 'get' | 'delete' | 'patch' | 'head'
@@ -37,7 +46,7 @@ export type APIRoute<In, Out> = {
   schema: string | null
   requiresSession?: undefined | true
   func: APIFunction<In, Out>,
-  permissions?: Record<string, CoreAPIPermission<In>[] | CoreAPIPermission<In>>
+  permissions?: Record<string, APIPermission<In>[] | APIPermission<In>>
 } | {
   type: 'post' | 'get' | 'delete' | 'patch' | 'head'
   route: string

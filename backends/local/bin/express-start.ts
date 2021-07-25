@@ -1,5 +1,5 @@
 import * as commander from 'commander'
-import { ExpressServer } from '@vramework/express/express-server'
+import { ExpressServer } from '@vramework/deploy-express/dist/express-server'
 
 import { config } from '@vramework-example/functions/src/config'
 import { setupServices } from "@vramework-example/functions/src/services"
@@ -15,7 +15,7 @@ async function action(): Promise<void> {
     const services = await setupServices(config)
     const routes = getRoutes()
 
-    const appServer = new ExpressServer(config, services, routes)
+    const appServer = new ExpressServer(config, services, routes as any)
     appServer.init().then(() => appServer.start())
     process.removeAllListeners('SIGINT').on('SIGINT', () => {
       appServer.stop()

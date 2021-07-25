@@ -1,4 +1,4 @@
-import { generateRoutesImports } from '@vramework/backend-common/src/routes-generator'
+import { generateRoutesImports } from '@vramework/core/dist/routes-generator'
 
 generateRoutesImports(
     `${__dirname}/../packages/functions/src/routes`,

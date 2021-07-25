@@ -1,8 +1,8 @@
 {
   "name": "@vramework-example/functions",
   "version": "0.0.0",
-  "description": "The vramework backend functions logic package",
-  "repository": "git@github.com:vlandor/vramework.git",
+  "description": "The vramework backend functions package",
+  "repository": "git@github.com:vlandor/vramework-example.git",
   "author": "Valndor LTD",
   "license": "MIT",
   "private": true,
@@ -10,33 +10,15 @@
     "tsc": "tsc"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cookie": "^0.4.0",
-    "@types/jsonwebtoken": "^8.5.0",
+    "@types/jsonwebtoken": "^8.5.4",
     "@types/node": "^14.14.21",
-    "@types/node-fetch": "^2.5.8",
-    "@types/pg": "^7.14.9",
-    "@types/uuid": "^8.3.0"
+    "@types/pg": "^8.6.1"
   },
   "dependencies": {
-    "@vramework-example/types": "^0.0.0",
-    "@vramework/backend-common": "^0.0.0",
-    "@aws-sdk/client-s3": "^3.4.1",
-    "@aws-sdk/client-secrets-manager": "^3.3.0",
-    "@aws-sdk/s3-request-presigner": "^3.4.1",
-    "ably": "^1.2.5",
-    "ajv": "^7.0.3",
-    "ajv-formats": "^1.5.1",
-    "aws-sdk": "^2.839.0",
-    "bcryptjs": "^2.4.3",
-    "cookie": "^0.4.1",
-    "jsonwebtoken": "^8.5.1",
-    "node-fetch": "^2.6.1",
-    "pg": "^8.5.1",
-    "pg-camelcase": "^0.0.3",
-    "pino": "^6.0.0",
-    "snake-case": "^3.0.4",
-    "typescript-json-schema": "^0.47.0",
-    "uuid": "^8.3.2"
+    "@vramework/aws": "^0.0.0",
+    "@vramework/generic": "^0.0.0",
+    "@vramework/core": "^0.0.0",
+    "@vramework/postgres": "^0.0.0",
+    "pino": "^6.0.0"
   }
 }

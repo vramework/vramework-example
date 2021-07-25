@@ -1,19 +1,17 @@
 import { Config, Services, SingletonServices } from './api'
 import pino from "pino"
-import { JWTManager } from '@vramework/backend-common/src/services/jwt/jwt-manager'
-import { AWSSecrets } from '@vramework/backend-common/src/services/secrets/aws-secrets'
-import { S3Content } from '@vramework/backend-common/src/services/content/s3-content'
-import { LocalContent } from '@vramework/backend-common/src/services/content/local-content'
-import { LocalEmail } from '@vramework/backend-common/src/services/email/local-email'
-import { DatabasePostgresPool } from '@vramework/backend-common/src/services/database/database-postgres-pool'
-import { VrameworkSessionService } from '@vramework/backend-common/src/services/session/vramework-session-service'
+import { JWTService } from '@vramework/core/dist/services/jwt-service'
+import { AWSSecrets } from '@vramework/aws/dist/aws-secrets'
+import { S3Content } from '@vramework/aws/dist/s3-content'
+import { LocalContent } from '@vramework/core/dist/services/local-content'
+import { DatabasePostgresPool } from '@vramework/postgres/dist/database-postgres-pool'
+import { VrameworkSessionService } from '@vramework/core/dist/services/vramework-session-service'
 
-import '@enjamon/api/generated/schemas'
-import { ContentService } from '@vramework/backend-common/src/services/content/content'
+import '@vramework-example/functions/generated/schemas'
 import { Session } from 'inspector'
-import { DatabasePostgresClient } from '@vramework/backend-common/src/services/database/database-postgres-client'
-import { exactlyOneResult } from '@vramework/backend-common/src/services/database/database-utils'
-import { CoreUserSession } from '../../../vramework/backend-common/src/user-session'
+import { DatabasePostgresClient } from '@vramework/postgres/dist/database-postgres-client'
+import { exactlyOneResult } from '@vramework/postgres/dist/database-utils'
+import { CoreUserSession } from '@vramework/core/dist/user-session'
 
 export const setupServices = async (config: Config): Promise<SingletonServices> => {
   const logger = pino()
@@ -29,7 +27,7 @@ export const setupServices = async (config: Config): Promise<SingletonServices> 
   const databasePool = new DatabasePostgresPool(pgConfig, logger)
   await databasePool.init()
 
-  const jwt = new JWTManager<CoreUserSession>(async () => {
+  const jwt = new JWTService<CoreUserSession>(async () => {
     const { rows: jwtSecrets } = await databasePool.query<any>('SELECT * FROM app."jwt_secret"')
     return jwtSecrets
   }, logger)
@@ -40,15 +38,16 @@ export const setupServices = async (config: Config): Promise<SingletonServices> 
     return exactlyOneResult(result.rows, new Error())
   })
 
-  let content: ContentService
+  let content: LocalContent | S3Content
   if (process.env.NODE_ENV === 'production' || process.env.PRODUCTION_SERVICES) {
-    content = new S3Content(config, logger)
-    await content.init(secrets)
+    content = new S3Content(config, logger, {} as any)
   } else {
     content = new LocalContent(config, logger)
   }
 
-  const email = new LocalEmail(logger)
+  const email = {
+    sendGreedingCard: console.log
+  }
 
   await Promise.all(promises)
   

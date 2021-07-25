@@ -1,5 +1,5 @@
-import { postgresMigrate } from '@vramework/backend-common/src/postgres-migrate'
-import { AWSSecrets } from '@vramework/backend-common/src/services/secrets/aws-secrets'
+import { postgresMigrate } from '@vramework/postgres/dist/postgres-migrate'
+import { AWSSecrets } from '@vramework/aws/dist/aws-secrets'
 import { config } from '@vramework-example/functions/src/config'
 import pino from 'pino'
 
